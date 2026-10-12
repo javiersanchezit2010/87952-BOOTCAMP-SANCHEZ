@@ -1,0 +1,263 @@
+# Clase Siete - 31 de Agosto del 2026
+
+# Repaso
+
+* Hablamos de LMStudio
+* Python
+  * Funciones Build-In
+    * input
+    * print
+    * type
+  * Tipos de Datos
+    * Primitivos
+      * float
+      * str
+      * int
+      * bool
+      * None
+    * Collecciones
+      * lista
+      * tuplas
+      * diccionario
+        * Ejercicio de diccionario
+      * rangos
+      * set
+  * Funciones
+    * Tambien son un tipo de datos
+* WebDev
+  * JSON
+ * IA
+   * Modelos de HF
+     * chronos-2
+
+> Cuando quiero utilizar el modelo de HF tuve que usar numpy
+
+---
+
+# Python
+
+## Colab de la Clase
+
+* https://colab.research.google.com/drive/1TdThW9HVadxBmfv_yuGdd3XUStjyZuoz?usp=sharing
+
+## Operadores
+
+* Un operador
+ * Es un simbolo que hace algo sobre una o varias variables
+ * Ej
+   * 2+2 suma ambas variables
+* El operador depende del tipo de datos de las variables con las que opera
+    * + no funciona igual con numeros que con listas
+
+* Ejemplo. En el primer escenario el operador suma, en el segundo concatena
+
+```python
+var1 = 3
+var2 = 5
+
+var3 = var1 + var2
+print(var3)
+
+
+var1 = [3]
+var2 = [5]
+
+var3 = var1 + var2
+print(var3)
+```
+
+## Tipos de datos
+
+* Hay un tipo de datos muy importante que es la clase
+* Basicamente un contenedor de metodos
+
+## Numpy
+
+* Introduccion:
+    * Python es un lenguaje Interpretado
+    * Los leguajes interpretados son mas lentos que los lenguajes compilados
+      * Los juegos como el GTA (que ahora se filtro) se hacen en lenguaje como C++ por lo general
+
+<img width="486" height="286" alt="image" src="https://github.com/user-attachments/assets/b94280f1-7790-4c89-935f-0e21bf208703" />
+
+    * Python es el lenguaje que mas se usa para la IA
+    * LA IA necesita CAPACIDAD DE COMPUTO
+    * Como es que la ia que necesita capacida de computo, se centra en procesar arreglas larguisimos, hacer operaciones de matrices gigantescas, usa python que es inrepretado?
+          * La parte que usa mucho la CPU se hacen con librerias en C++ que estan super optimizadas, la parte generica del algotitmo esta en python
+
+### Comparativa numpy vs array comunes
+
+#### Sin Numpy
+
+* Prompt
+```
+Quiero un programa en python que cree un vector de quince millones de elementos con valores aleatorios entre 1 y 10. Luego que lo recorra y a cada elemento le sume 10. Quiero que tomes el tiempo que tarda en recorrer el array y a cada elemento sumarle 10.
+```
+
+
+* Codigo
+```
+import random
+import time
+
+inicio_antes_crear_vector = time.perf_counter()
+
+# Crear un vector de 1.000.000 de elementos
+vector = [random.randint(1, 10) for _ in range(50_000_000)]
+
+# Iniciar cronómetro
+inicio = time.perf_counter()
+
+# Recorrer el vector y sumar 10 a cada elemento
+for i in range(len(vector)):
+    vector[i] += 10
+
+# Detener cronómetro
+fin = time.perf_counter()
+
+print(f"Tiempo recorrer vector: {fin - inicio:.6f} segundos")
+print(f"Tiempo total crear y recorrer: {fin - inicio_antes_crear_vector:.6f} segundos")
+```
+* Resultado
+
+```
+Tiempo recorrer vector: 6.020812 segundos
+Tiempo total crear y recorrer: 43.196821 segundos
+```
+
+#### Con Numpy
+
+```
+import numpy as np
+import time
+
+inicio_antes_crear_vector = time.perf_counter()
+
+# Crear un array de 1.000.000 de elementos
+vector = np.random.randint(1, 11, size=50_000_000)
+
+# Iniciar cronómetro
+inicio = time.perf_counter()
+
+# Sumar 10 a todos los elementos
+vector += 10
+
+# Detener cronómetro
+fin = time.perf_counter()
+
+print(f"Tiempo recorrer vector: {fin - inicio:.6f} segundos")
+print(f"Tiempo total crear y recorrer: {fin - inicio_antes_crear_vector:.6f} segundos")
+```
+
+* Resultado
+
+```
+Tiempo recorrer vector: 0.052077 segundos
+Tiempo total crear y recorrer: 1.232392 segundos
+```
+---
+
+### Sobrecarga de operadores en numpy
+
+* Numpy sobrecarga los operadores para que sea mas facil hacer las operaciones que se suelen hacer con la IA
+
+---
+
+### Observaciones del codigo generados
+
+* Vemos como usa el _ para el separador de miles (15_000_000) para mayor legi ilidad
+* Esto -> vector = [random.randint(1, 10) for _ in range(15_000_000)] se llama comprension de listas
+*  for _ in range(10) -> el _ significa que hago una iteracion 9 veces pero no quiero usar ninguna variable para guardar el indice
+
+---
+# BREAK
+# Hasta las 20:30
+---
+
+## Explorando numpy
+
+* De que tipo de dato es la variable np
+
+```
+import numpy as np
+
+print(type(np))
+```
+
+* Me devuelve
+
+```
+<class 'module'>
+```
+
+* np es un modulo (module)
+  * Un modulo es un conjunto de variables y funciones
+  * Generamente las variabels y funciones de un modulo se pueden importar y usar en otro modulo
+  * En este caso estoy importando el modulo completo
+* array es un una funcion dentro del modulo np
+* La funcion array me devuelve un objet
+
+* Cuandp importo un modulo le puedo dar el nombre que quiero
+
+```
+#Aca le estoy dando un alias, sobrenombre al moddulo numpy, lo podria llamar pepito
+import numpy as pepito
+# o puedo importarlo sin alias
+import numpy
+
+ver = numpy.array([12,32])
+```
+
+> Es un estandar que establecio la comunidad de facto
+
+> "o nació en IA. Los alias pd para Pandas y np para NumPy vienen del ecosistema científico de Python y se consolidaron antes de que existiera el uso moderno de Python en IA." . Gabriel Dixit
+
+* Como sabe de donde se importan los modulos:
+  * Se busca en la carpeta local
+  * Se busca en el directorio de instalacion global (como pasa con numpy)
+
+```python
+import numpy as np
+print(np.__file__)
+```
+
+* Explorar que funciones y variables tiene declarado el modulo de numpy
+  * Usamos la funcion dir
+
+```python
+import numpy as np
+
+dir(np)
+```
+
+* Explorar la doucumentacion de numpy con help
+
+```python
+import numpy as np
+
+help(np)
+```
+
+```python
+import numpy as np
+
+help(np.array)
+```
+
+---
+        
+# Paginas para practicar python
+
+* Codewars
+  * https://www.codewars.com/kata/search/python
+* Checkio
+  * https://py.checkio.org/
+* Condingame
+  * https://codefinity.com/
+* Para demostrar conocimiento en el CV
+  * https://www.hackerrank.com/
+
+---
+
+# Proxima clase vamos a hablar de funciones...
+
