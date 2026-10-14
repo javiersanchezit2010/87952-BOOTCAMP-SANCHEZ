@@ -1,0 +1,120 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "CRUD Personas",
+  "dateExported": "2026-10-14T09:00:00.000Z",
+  "version": "1.2",
+  "folders": [],
+  "requests": [
+    {
+      "_id": "crear-persona-valida",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Crear persona válida",
+      "url": "http://127.0.0.1:5000/personas",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"dni\": \"30123456\",\n  \"nombre\": \"Javier\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "_id": "listar-personas",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Listar personas",
+      "url": "http://127.0.0.1:5000/personas",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "buscar-persona-existente",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Buscar persona existente",
+      "url": "http://127.0.0.1:5000/personas/30123456",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "crear-dni-duplicado",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Crear DNI duplicado",
+      "url": "http://127.0.0.1:5000/personas",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"dni\": \"30123456\",\n  \"nombre\": \"María\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "_id": "buscar-persona-inexistente",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Buscar DNI inexistente",
+      "url": "http://127.0.0.1:5000/personas/no-existe",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "crear-nombre-invalido",
+      "colId": "crud-personas",
+      "containerId": "",
+      "name": "Crear nombre inválido",
+      "url": "http://127.0.0.1:5000/personas",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2026-10-14T09:00:00.000Z",
+      "modified": "2026-10-14T09:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"dni\": \"40123456\",\n  \"nombre\": \"JAVIER\"\n}"
+      },
+      "tests": []
+    }
+  ]
+}
