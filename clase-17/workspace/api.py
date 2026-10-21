@@ -1,12 +1,21 @@
 from datetime import date
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 from models.alumno import Alumno
 from services.alumno_service import AlumnoService
 
 
 app = Flask(__name__)
+CORS(app)
+
+@app.after_request
+def agregar_encabezados_cors(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 
 @app.get("/alumnos")
